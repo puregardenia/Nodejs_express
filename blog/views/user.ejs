@@ -1,4 +1,5 @@
 <%- include header %>
+
 <% posts.forEach(function (post, index) { %>
   <p><h2><a href="/u/<%= post.name %>/<%= post.time.day %>/<%= post.title %>"><%= post.title %></a></h2></p>
   <p class="info">
@@ -6,5 +7,9 @@
     日期：<%= post.time.minute %>
   </p>
   <p><%- post.post %></p>
+  <p class="info">阅读：<%= post.pv %> | 评论：<%= post.comments.length %></p>
 <% }) %>
+
+<%- include paging %>
+
 <%- include footer %>
