@@ -13,12 +13,27 @@ npm install -g supervisor
 supervisor app.js
 ```
 
+这个博客中使用的是 运行 ``npm start`` 命令运行的
+查看 package:json 文件
+
+```json
+"scripts": {
+    "start": "node ./bin/www"
+}
+```
+
+所以要使用以下命令来实现修改文件自动重启命令
+
+```
+supervisor ./bin/www
+```
+
 # Module
 
 ## nodejs 核心模块
 
 - crypto ``生成散列值来加密密码``
-- 
+- fs
 
 
 ## 自动生成module(generator)

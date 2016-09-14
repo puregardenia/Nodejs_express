@@ -24,20 +24,21 @@
                 <% } %>
             <% }) %>
         <% } %>
+
+        <% if (post.reprint_info && post.reprint_info.reprint_from) { %>
+            <br><a href="/u/<%= post.reprint_info.reprint_from.name %>/<%= post.reprint_info.reprint_from.day %>/<%= post.reprint_info.reprint_from.title %>">原文链接</a>
+        <% } %>
+
     </p>
     <p><%- post.post %></p>
     <p class="info">
-        阅读：
-        <% if (!post.pv) { %>
-            <%= 0 %>
-        <% } else {%>
-            <%= post.pv %>
-        <% } %>
-        | 评论：
-        <% if (post.comments) { %>
-            <%= post.comments.length %>
+        阅读：<%= (!post.pv) ? 0 : post.pv %> |
+        评论：<%= (!post.comments) ? 0 : post.comments.length %> |
+        转载：
+        <% if (post.reprint_info && post.reprint_info.reprint_to) { %>
+            <%= post.reprint_info.reprint_to.length %>
         <% } else { %>
-        <%= 0 %>
+            <%= 0 %>
         <% } %>
     </p>
 <% }) %>
