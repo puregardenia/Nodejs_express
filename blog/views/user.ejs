@@ -7,7 +7,20 @@
     日期：<%= post.time.minute %>
   </p>
   <p><%- post.post %></p>
-  <p class="info">阅读：<%= post.pv %> | 评论：<%= post.comments.length %></p>
+  <p class="info">
+    阅读：
+    <% if (!post.pv) { %>
+      <%= 0 %>
+    <% } else {%>
+      <%= post.pv %>
+    <% } %>
+    | 评论：
+    <% if (post.comments) { %>
+      <%= post.comments.length %>
+    <% } else { %>
+      <%= 0 %>
+    <% } %>
+  </p>
 <% }) %>
 
 <%- include paging %>

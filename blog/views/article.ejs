@@ -15,10 +15,13 @@
   <% if (!post.pv) { %>
     <%= 0 %>
   <% } else {%>
-    <%= post.pv %> |
+    <%= post.pv %>
   <% } %>
+  | 评论：
   <% if (post.comments) { %>
-    评论：<%= post.comments.length %>
+    <%= post.comments.length %>
+  <% } else { %>
+    <%= 0 %>
   <% } %>
 </p>
 
