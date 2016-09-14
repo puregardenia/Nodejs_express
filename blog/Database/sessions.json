@@ -1,0 +1,10 @@
+{ 
+    "_id" : "LjOLVg2rYUq0zlzfwbViaSDsbUiFswMk", 
+    "session" : "{\"cookie\":{\"originalMaxAge\":2591999986,\"expires\":\"2016-10-14T02:28:45.684Z\",\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"user\":{\"_id\":\"57d8b085891f6fac226ce85a\",\"name\":\"1055\",\"password\":\"c4ca4238a0b923820dcc509a6f75849b\",\"email\":\"1055377431@qq.com\",\"head\":\"http://www.gravatar.com/avatar/b124897bca016e32317853e35babdb90?s=48\"}}", 
+    "expires" : ISODate("2016-10-14T02:28:45.684+0000")
+}
+{ 
+    "_id" : "fEeL2pYtomzhwANCzPoYqtQPzZy8wr6E", 
+    "session" : "{\"cookie\":{\"originalMaxAge\":2591999992,\"expires\":\"2016-10-14T09:13:37.213Z\",\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"user\":null}", 
+    "expires" : ISODate("2016-10-14T09:13:37.213+0000")
+}
