@@ -31,7 +31,7 @@ var upload = multer({
 module.exports = function (app) {
     app.get('/', function (req, res) {
         //判断是否是第一页，并把请求的页数转换成 number 类型
-        var page = parseInt(req.query.p) || 1;
+        var page = parseInt(req.params.p) || 1;
         //查询并返回第 page 页的 10 篇文章
         Post.getTen(null, page, function (err, posts, total) {
             if (err) {
@@ -285,14 +285,15 @@ module.exports = function (app) {
         });
     });
 
-    app.get('/u/:name/:day/:title', function (req, res) {
-        Post.getOne(req.params.name, req.params.day, req.params.title, function (err, post) {
+    // 不能为'/u/:_id',避免与'/u/:name'的冲突
+    app.get('/p/:_id', function (req, res) {
+        Post.getOne(req.params._id, function (err, post) {
             if (err) {
                 req.flash('error', err);
                 return res.redirect('/');
             }
             res.render('article', {
-                title: req.params.title,
+                title: post.title,
                 post: post,
                 user: req.session.user,
                 success: req.flash('success').toString(),
@@ -301,10 +302,10 @@ module.exports = function (app) {
         });
     });
 
-    app.get('/edit/:name/:day/:title', checkLogin);
-    app.get('/edit/:name/:day/:title', function (req, res) {
-        var currentUser = req.session.user;
-        Post.edit(currentUser.name, req.params.day, req.params.title, function (err, post) {
+    app.get('/edit/:_id', checkLogin);
+    app.get('/edit/:_id', function (req, res) {
+        //var currentUser = req.session.user;
+        Post.edit(req.params._id, function (err, post) {
             if (err) {
                 req.flash('error', err);
                 return res.redirect('back');
@@ -319,11 +320,11 @@ module.exports = function (app) {
         });
     });
 
-    app.post('/edit/:name/:day/:title', checkLogin);
-    app.post('/edit/:name/:day/:title', function (req, res) {
-        var currentUser = req.session.user;
-        Post.update (currentUser.name, req.params.day, req.params.title, req.body.post, function (err) {
-            var url = encodeURI('/u/' + req.params.name + '/' + req.params.day + '/' + req.params.title);
+    app.post('/edit/:_id', checkLogin);
+    app.post('/edit/:_id', function (req, res) {
+        //var currentUser = req.session.user;
+        Post.update (req.params._id, req.body.post, function (err) {
+            var url = encodeURI('/p/' + req.params._id);
             if (err) {
                 req.flash('error', err);
                 return res.redirect(url);
@@ -333,10 +334,9 @@ module.exports = function (app) {
         });
     });
 
-    app.get('/remove/:name/:day/:title', checkLogin);
-    app.get('/remove/:name/:day/:title', function (req, res) {
-        var currentUser = req.session.user;
-        Post.remove(currentUser.name, req.params.day, req.params.title, function (err) {
+    app.get('/remove/:_id', checkLogin);
+    app.get('/remove/:_id', function (req, res) {
+        Post.remove(req.params._id, function (err) {
             if (err) {
                 req.flash('error', err);
                 return res.redirect('back');
@@ -346,18 +346,18 @@ module.exports = function (app) {
         });
     });
 
-    app.get('/reprint/:name/:day/:title', checkLogin);
-    app.get('/reprint/:name/:day/:title', function (req, res) {
+    app.get('/reprint/:_id', checkLogin);
+    app.get('/reprint/:_id', function (req, res) {
         // 我们需要通过 Post.edit() 返回一篇文章 markdown 格式的文本，而不是通过 Post.getOne 返回一篇转义后的 HTML 文本，
         // 因为我们还要将修改后的文档存入数据库，而数据库中应该存储 markdown 格式的文本。
-        Post.edit(req.params.name, req.params.day, req.params.title, function (err, post) {
+        Post.edit(req.params._id, function (err, post) {
             if (err) {
                 req.flash('error', err);
                 return res.redirect(back);
             }
 
             var currentUser = req.session.user,
-                reprint_from = {name: post.name, day: post.time.day, title: post.title},
+                reprint_from = {name: post.name, _id: req.params._id},
                 reprint_to = {name: currentUser.name, head: currentUser.head};
             Post.reprint(reprint_from, reprint_to, function (err, post) {
                 if (err) {
@@ -365,7 +365,7 @@ module.exports = function (app) {
                     return res.redirect('back');
                 }
                 req.flash('success', '转载成功！');
-                var url = encodeURI('/u/' + post.name + '/' + post.time.day + '/' + post.title);
+                var url = encodeURI('/p/' + post._id);
                 res.redirect(url);
             });
         });

@@ -1,4 +1,9 @@
 { 
+    "_id" : "qdaU1CcDFuSkxvgUJp0iekHmJ5WzZXY-", 
+    "session" : "{\"cookie\":{\"originalMaxAge\":2591999983,\"expires\":\"2016-10-15T05:28:46.670Z\",\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"user\":{\"_id\":\"57d6257ee34060dc23f27fe1\",\"name\":\"pure\",\"password\":\"c4ca4238a0b923820dcc509a6f75849b\",\"email\":\"puregardenia@qq.com\"}}", 
+    "expires" : ISODate("2016-10-15T05:28:46.670+0000")
+}
+{ 
     "_id" : "LjOLVg2rYUq0zlzfwbViaSDsbUiFswMk", 
     "session" : "{\"cookie\":{\"originalMaxAge\":2591999986,\"expires\":\"2016-10-14T02:28:45.684Z\",\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"user\":{\"_id\":\"57d8b085891f6fac226ce85a\",\"name\":\"1055\",\"password\":\"c4ca4238a0b923820dcc509a6f75849b\",\"email\":\"1055377431@qq.com\",\"head\":\"http://www.gravatar.com/avatar/b124897bca016e32317853e35babdb90?s=48\"}}", 
     "expires" : ISODate("2016-10-14T02:28:45.684+0000")

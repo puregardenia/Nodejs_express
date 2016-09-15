@@ -1,6 +1,7 @@
 /**
  * Created by Administrator on 2016/9/12.
  */
+var ObjectID = require('mongodb').ObjectID;
 var mongodb = require('./db'),
     markdown = require('markdown').markdown;
 
@@ -95,7 +96,7 @@ Post.getTen = function (name, page, callback) {
 }
 
 //获取一篇文章
-Post.getOne = function (name, day, title, callback) {
+Post.getOne = function (_id, callback) {
     mongodb.open(function (err, db) {
         if (err) {
             return callback(err);
@@ -108,9 +109,7 @@ Post.getOne = function (name, day, title, callback) {
             }
             //根据用户名、发表日期及文章名进行查询
             collection.findOne({
-                "name": name,
-                "time.day": day,
-                "title": title
+                "_id": new ObjectID(_id)
             }, function (err, doc) {
                 if (err) {
                     mongodb.close();
@@ -119,9 +118,7 @@ Post.getOne = function (name, day, title, callback) {
                 if (doc) {
                     //每访问1次，pv值加1
                     collection.update({
-                        "name": name,
-                        "time.day": day,
-                        "title": title
+                        "_id": new ObjectID(_id)
                     }, {
                         $inc: {"pv":1}
                     }, function (err) {
@@ -147,7 +144,7 @@ Post.getOne = function (name, day, title, callback) {
 }
 
 //编辑一篇文章
-Post.edit = function (name, day, title, callback) {
+Post.edit = function (_id, callback) {
     mongodb.open(function (err, db) {
         if (err) {
             return callback(err);
@@ -160,9 +157,7 @@ Post.edit = function (name, day, title, callback) {
             }
             //根据用户名、发表日期及文章名进行查询
             collection.findOne({
-                "name": name,
-                "time.day": day,
-                "title": title
+                "_id": new ObjectID(_id)
             }, function (err, doc) {
                 mongodb.close();
                 if (err) {
@@ -175,7 +170,7 @@ Post.edit = function (name, day, title, callback) {
 }
 
 //更新一篇文章及其相关信息
-Post.update = function(name, day, title, post, callback) {
+Post.update = function(_id, post, callback) {
     //打开数据库
     mongodb.open(function (err, db) {
         if (err) {
@@ -189,9 +184,7 @@ Post.update = function(name, day, title, post, callback) {
             }
             //更新文章内容
             collection.update({
-                "name": name,
-                "time.day": day,
-                "title": title
+               "_id": new ObjectID(_id)
             }, {
                 $set: {post: post}
             }, function (err) {
@@ -206,7 +199,7 @@ Post.update = function(name, day, title, post, callback) {
 };
 
 //删除一篇文章
-Post.remove = function (name, day, title, callback) {
+Post.remove = function (_id, callback) {
     mongodb.open(function (err, db) {
         if (err) {
             return callback(err);
@@ -219,9 +212,7 @@ Post.remove = function (name, day, title, callback) {
             }
             //查询要删除的文档
             collection.findOne({
-                "name": name,
-                "time.day": day,
-                "title": title
+                "_id": new ObjectID(_id)
             }, function (err, doc) {
                 if (err) {
                     mongodb.close();
@@ -229,21 +220,19 @@ Post.remove = function (name, day, title, callback) {
                 }
                 //如果有 reprint_from，即该文章是转载来的，先保存下来 reprint_from
                 var reprint_from = "";
-                if (doc.reprint_info.reprint_from) {
+                if (doc.reprint_info && doc.reprint_info.reprint_from) {
                     reprint_from = doc.reprint_info.reprint_from;
                 }
                 if (reprint_from != "") {
                     //更新原文章所在文档的 reprint_to
                     collection.update({
-                        "name": reprint_from.name,
-                        "time.day": reprint_from.day,
-                        "title": reprint_from.title
+                        "_id": new ObjectID(reprint_from._id)
                     }, {
                         $pull: {
                             "reprint_info.reprint_to": {
-                                "name": name,
-                                "day": day,
-                                "title": title
+                                "name": doc.name,
+                                "day": doc.time.day,
+                                "title": doc.title
                             }
                         }
                     }, function (err) {
@@ -255,9 +244,7 @@ Post.remove = function (name, day, title, callback) {
                 }
                 //根据用户名、日期和标题查找并删除一篇文章
                 collection.remove({
-                    "name": name,
-                    "time.day": day,
-                    "title": title
+                    "_id": new ObjectID(_id)
                 }, {
                     w: 1
                 }, function (err) {
@@ -403,9 +390,7 @@ Post.reprint = function (reprint_from, reprint_to, callback) {
             }
             //找到被转载的文章的源文档
             collection.findOne({
-                "name": reprint_from.name,
-                "time.day": reprint_from.day,
-                "title": reprint_from.title
+                "_id": new ObjectID(reprint_from._id)
             }, function (err, doc) {
                 if (err) {
                     mongodb.close();
@@ -432,16 +417,15 @@ Post.reprint = function (reprint_from, reprint_to, callback) {
 
                 //更新被转载的原文档的 reprint_info 内的 reprint_to
                 collection.update({
-                    "name": reprint_from.name,
-                    "time.day": reprint_from.day,
-                    "title": reprint_from.title
+                    "_id": new ObjectID(reprint_from._id)
                 }, {
                     $push: {
                         "reprint_info.reprint_to": {
                             "name": doc.name,
                             "day": time.day,
                             "title": doc.title
-                        }}
+                        }
+                    }
                 }, function (err) {
                     if (err) {
                         mongodb.close();

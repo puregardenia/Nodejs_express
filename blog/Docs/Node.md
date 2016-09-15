@@ -54,6 +54,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 ## 手动安装module
 
+- mongodb
 - express-session
 - connect-mongo
 ```
@@ -71,6 +72,15 @@ app.use(session({
     port: settings.port
   })
 }));
+```
+
+mongodb
+
+```
+var ObjectID = require('mongodb').ObjectID;
+var Db = require('mongodb').Db,
+    Connection = require('mongodb').Connection,
+    Server = require('mongodb').Server;
 ```
 - connect-flash
 > 引入 flash 模块来实现页面通知（即成功与错误信息的显示）的功能。
