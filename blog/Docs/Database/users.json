@@ -2,30 +2,27 @@
     "_id" : ObjectId("57d6257ee34060dc23f27fe1"), 
     "name" : "pure", 
     "password" : "c4ca4238a0b923820dcc509a6f75849b", 
-    "email" : "puregardenia@qq.com"
-}
-{ 
-    "_id" : ObjectId("57d631793cd7ab8026bb4000"), 
-    "name" : "1", 
-    "password" : "c81e728d9d4c2f636f067f89cc14862c", 
-    "email" : "2@qq.com"
-}
-{ 
-    "_id" : ObjectId("57d64d6da64a36b42bc7f123"), 
-    "name" : "3", 
-    "password" : "eccbc87e4b5ce2fe28308fd9f2a7baf3", 
-    "email" : "3@qq.com"
+    "email" : "puregardenia@qq.com", 
+    "head" : "http://www.gravatar.com/avatar/d615d5793929e8c7d70eab5f00f7f5f1?s=48"
 }
 { 
     "_id" : ObjectId("57d66a590909f7a42bdabb42"), 
     "name" : "Test", 
     "password" : "c4ca4238a0b923820dcc509a6f75849b", 
-    "email" : "test@qq.com"
+    "email" : "test@qq.com", 
+    "head" : "http://www.gravatar.com/avatar/d615d5793929e8c7d70eab5f00f7f5f1?s=48"
 }
 { 
-    "_id" : ObjectId("57d8b085891f6fac226ce85a"), 
-    "name" : "1055", 
+    "_id" : ObjectId("57da3b8af6724a34aaf71255"), 
+    "name" : "1", 
     "password" : "c4ca4238a0b923820dcc509a6f75849b", 
-    "email" : "1055377431@qq.com", 
-    "head" : "http://www.gravatar.com/avatar/b124897bca016e32317853e35babdb90?s=48"
+    "email" : "1@qq.com", 
+    "head" : "http://www.gravatar.com/avatar/d615d5793929e8c7d70eab5f00f7f5f1?s=48"
+}
+{ 
+    "_id" : ObjectId("57da3ffb9c0be55019774fe1"), 
+    "name" : "2", 
+    "password" : "c81e728d9d4c2f636f067f89cc14862c", 
+    "email" : "2@qq.com", 
+    "head" : "http://www.gravatar.com/avatar/4f987513d1e66d3d02d60b7d82667000?s=48"
 }

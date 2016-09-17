@@ -1,7 +1,7 @@
 { 
     "_id" : "qdaU1CcDFuSkxvgUJp0iekHmJ5WzZXY-", 
-    "session" : "{\"cookie\":{\"originalMaxAge\":2591999983,\"expires\":\"2016-10-15T05:28:46.670Z\",\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"user\":{\"_id\":\"57d6257ee34060dc23f27fe1\",\"name\":\"pure\",\"password\":\"c4ca4238a0b923820dcc509a6f75849b\",\"email\":\"puregardenia@qq.com\"}}", 
-    "expires" : ISODate("2016-10-15T05:28:46.670+0000")
+    "session" : "{\"cookie\":{\"originalMaxAge\":2591999978,\"expires\":\"2016-10-15T14:28:34.514Z\",\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"user\":null}", 
+    "expires" : ISODate("2016-10-15T14:28:34.514+0000")
 }
 { 
     "_id" : "LjOLVg2rYUq0zlzfwbViaSDsbUiFswMk", 

@@ -52,9 +52,17 @@
             "website" : "http://baidu.com", 
             "time" : "2016-9-13 12:17", 
             "content" : "Test1"
+        }, 
+        {
+            "name" : "1", 
+            "head" : "http://www.gravatar.com/avatar/d615d5793929e8c7d70eab5f00f7f5f1?s=48", 
+            "email" : "1@qq.com", 
+            "website" : "/u/1", 
+            "time" : "2016-9-15 14:58", 
+            "content" : "Test Aysnc Commonts"
         }
     ], 
-    "pv" : NumberInt(9)
+    "pv" : NumberInt(37)
 }
 { 
     "_id" : ObjectId("57da2ddd2a60c37085c8da23"), 
@@ -80,7 +88,7 @@
     "reprint_info" : {
 
     }, 
-    "pv" : NumberInt(2)
+    "pv" : NumberInt(4)
 }
 { 
     "_id" : ObjectId("57da2e122a60c37085c8da24"), 
@@ -202,5 +210,31 @@
             "_id" : "57da2e352a60c37085c8da25"
         }
     }, 
-    "pv" : NumberInt(4)
+    "pv" : NumberInt(7)
+}
+{ 
+    "_id" : ObjectId("57da40659c0be55019774fe2"), 
+    "name" : "1", 
+    "head" : "http://www.gravatar.com/avatar/d615d5793929e8c7d70eab5f00f7f5f1?s=48", 
+    "time" : {
+        "date" : ISODate("2016-09-15T06:32:05.191+0000"), 
+        "year" : NumberInt(2016), 
+        "month" : "2016-9", 
+        "day" : "2016-9-15", 
+        "minute" : "2016-9-15 14:32"
+    }, 
+    "title" : "Avatar", 
+    "tags" : [
+        "Avatar", 
+        "Test", 
+        ""
+    ], 
+    "post" : "头像显示测试", 
+    "comments" : [
+
+    ], 
+    "reprint_info" : {
+
+    }, 
+    "pv" : NumberInt(6)
 }

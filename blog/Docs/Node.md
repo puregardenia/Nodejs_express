@@ -1,6 +1,6 @@
-# 服务
+## 服务
 
-## supervisor
+### supervisor
 每次我们更新代码后，都需要手动停止并重启应用，使用 supervisor 模块可以解决这个问题，每当我们保存修改的文件时，supervisor 都会自动帮我们重启应用。通过：
 
 ```
@@ -28,36 +28,36 @@ supervisor app.js
 supervisor ./bin/www
 ```
 
-# Module
+## Module
 
-## nodejs 核心模块
+### nodejs 核心模块
 
-- crypto ``生成散列值来加密密码``
-- fs
+1. crypto ``生成散列值来加密密码``
+1. fs
 
 
-## 自动生成module(generator)
+### 自动生成module(generator)
 
-- serve-favicon
-- morgan
-```
-var logger = require('morgan');
-```
-- cookie-parser
-- body-parser
+1. serve-favicon
+2. morgan ``var logger = require('morgan');``
+
+3. cookie-parser
+1. body-parser
 ```
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 ```
-- 
 
+### 手动安装module
 
-## 手动安装module
+mongodb
 
-- mongodb
-- express-session
-- connect-mongo
+express-session
+
+connect-mongo
+
 ```
+// connect-mongo
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
@@ -82,6 +82,25 @@ var Db = require('mongodb').Db,
     Connection = require('mongodb').Connection,
     Server = require('mongodb').Server;
 ```
-- connect-flash
+
+connect-flash
+
 > 引入 flash 模块来实现页面通知（即成功与错误信息的显示）的功能。
+
+async
+
+> 解决数据库操作等嵌套层级过深的问题
+
+package.json 中添加如下包，并 ``npm install``
+```
+"async": "*"
+```
+
+generic-pool
+
+package.json 中添加如下包，并 ``npm install``
+
+```
+"generic-pool": "*"
+```
 
