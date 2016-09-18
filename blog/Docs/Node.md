@@ -104,3 +104,14 @@ package.json 中添加如下包，并 ``npm install``
 "generic-pool": "*"
 ```
 
+express-handlebars
+
+使用的 EJS 模板引擎,当模版文件代码比较多且逻辑复杂时，代码就变得非常难看了，满眼的 <% 和 %>。
+
+Handlebars 是 JavaScript 一个语义模板库，通过对 view 和 data 的分离来快速构建 Web 模板。它采用 "Logic-less template"（无逻辑模版）的思路，在加载时被预编译，而不是到了客户端执行到代码时再去编译，这样可以保证模板加载和运行的速度。Handlebars 兼容 Mustache，你可以在 Handlebars 中导入 Mustache 模板。
+
+express-handlebars  包弥补了使用 consolidate.js + handlebars 不支持从一个模版文件加载另一个模版文件的缺点
+
+```
+"express-handlebars": "*"
+```

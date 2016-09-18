@@ -1,6 +1,28 @@
-var mongodb = require('./db');
+//var mongodb = require('./db');
 var crypto = require('crypto');
 var async = require('async');
+
+
+// 数据库连接池模式
+var Db = require('./db');
+var poolModule = require('generic-pool');
+var pool = poolModule.Pool({
+    name     : 'mongoPool',
+    create   : function(callback) {
+        var mongodb = Db();
+        mongodb.open(function (err, db) {
+            callback(err, db);
+        })
+    },
+    destroy  : function(mongodb) {
+        mongodb.close();
+    },
+    max      : 100,
+    min      : 5,
+    idleTimeoutMillis : 30000,
+    log      : true
+});
+
 
 function User(user) {
     this.name = user.name;
@@ -22,30 +44,58 @@ User.prototype.save = function(callback) {
         email: this.email,
         head: head
     };
-    //操作数据库
+    //数据库连接池操作数据库
     async.waterfall([
         function (cb) {
-            mongodb.open(function (err, db) {
-                cb(err, db);
+            pool.acquire(function (err, mongodb) {
+                cb(err, mongodb);
             });
         },
-        function (db, cb) {
-            db.collection('users', function (err, collection) {
-                cb(err, collection);
+        function (mongodb, cb) {
+            mongodb.collection('users', function (err, collection, mongodb) {
+                cb(err, collection, mongodb);
             });
         },
-        function (collection, cb) {
+        function (collection, mongodb, cb) {
             //将用户数据插入 users 集合
             collection.insert(user, {
                 safe: true
-            }, function (err, user) {
-                cb(err, user);//成功！err 为 null，并返回存储后的用户文档
+            }, function (err, user, mongodb) {
+                cb(err, user, mongodb);//成功！err 为 null，并返回存储后的用户文档
             });
         }
-    ], function (err, user) {
-        mongodb.close();
+    ], function (err, user, mongodb) {
+        pool.release(mongodb);
         callback(err, user[0]);
     });
+
+    //操作数据库
+    //async.waterfall([
+    //    function (cb) {
+    //        mongodb.open(function (err, db) {
+    //            cb(err, db);
+    //        });
+    //    },
+    //    function (db, cb) {
+    //        db.collection('users', function (err, collection) {
+    //            cb(err, collection);
+    //        });
+    //    },
+    //    function (collection, cb) {
+    //        //将用户数据插入 users 集合
+    //        collection.insert(user, {
+    //            safe: true
+    //        }, function (err, user) {
+    //            cb(err, user);//成功！err 为 null，并返回存储后的用户文档
+    //        });
+    //    }
+    //], function (err, user) {
+    //    mongodb.close();
+    //    callback(err, user[0]);
+    //});
+
+
+
     //打开数据库
     //mongodb.open(function (err, db) {
     //    if (err) {
@@ -74,28 +124,52 @@ User.prototype.save = function(callback) {
 //读取用户信息
 User.get = function(name, callback) {
 
+    // 数据库连接池操作数据库
     async.waterfall([
         function (cb) {
-            mongodb.open(function (err, db) {
-                cb(err, db);
+            pool.acquire(function (err, mongodb) {
+                cb(err, mongodb);
             });
         },
-        function (db, cb) {
-            db.collection('users', function (err, collection) {
-                cb(err, collection);
+        function (mongodb, cb) {
+            mongodb.collection('users', function (err, collection, mongodb) {
+                cb(err, collection, mongodb);
             });
         },
-        function (collection, cb) {
+        function (collection, mongodb, cb) {
             collection.findOne({
                 name: name
-            }, function (err, user) {
-                cb(err, user);
+            }, function (err, user, mongodb) {
+                cb(err, user, mongodb);
             })
         }
-    ], function (err, user) {
-        mongodb.close();
+    ], function (err, user, mongodb) {
+        pool.release(mongodb);
         callback(err, user);
     });
+
+    //async.waterfall([
+    //    function (cb) {
+    //        mongodb.open(function (err, db) {
+    //            cb(err, db);
+    //        });
+    //    },
+    //    function (db, cb) {
+    //        db.collection('users', function (err, collection) {
+    //            cb(err, collection);
+    //        });
+    //    },
+    //    function (collection, cb) {
+    //        collection.findOne({
+    //            name: name
+    //        }, function (err, user) {
+    //            cb(err, user);
+    //        })
+    //    }
+    //], function (err, user) {
+    //    mongodb.close();
+    //    callback(err, user);
+    //});
 
     //打开数据库
     //mongodb.open(function (err, db) {
