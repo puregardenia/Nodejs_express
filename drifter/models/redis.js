@@ -169,6 +169,10 @@ exports.throw = function(bottle, callback) {
 exports.pick = function(info, callback) {
     checkPickTimes(info.user, function (result) {
 
+        if (result.code === 0) {
+            return callback(result);
+        }
+
         //20% 概率捡到海星
         if (Math.random() <= 0.2) {
             return callback({code: 1, msg: "海星"});
