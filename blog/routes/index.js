@@ -14,6 +14,8 @@ var crypto = require('crypto'),
     Comment = require('../models/comment.js'),
     multer = require('multer');
 
+var passport = require('passport');
+
 // 文件上传
 var storage = multer.diskStorage({
     destination: function (req, file, cb){
@@ -112,6 +114,17 @@ module.exports = function (app) {
         });
 
     });
+
+    app.get('/login/github', passport.authenticate("github", {session: false}));
+    app.get('/login/github/callback', passport.authenticate('github', {
+        session: false,
+        failureRedirect: '/login',
+        successFlash: '登录成功！'
+    }), function (req, res) {
+        req.session.user = {name: req.user.username, head: req.user._json.avatar_url};
+        res.redirect('/');
+    });
+
     app.post('/login', checkNotLogin);
     app.post('/login', function (req, res) {
         //生成密码的 md5 值
@@ -260,19 +273,22 @@ module.exports = function (app) {
     app.get('/u/:name', function (req, res) {
         var page = parseInt(req.query.p) || 1;
         // 检查用户是否存在
-        User.get(req.params.name, function (err, user) {
-            if (!user) {
-                req.flash('error', '用户不存在！');
-                return res.redirect('/');
-            }
+        //使用Github Auth登录时注释
+        // User.get(req.params.name, function (err, user) {
+            //if (!user) {
+            //    req.flash('error', '用户不存在！');
+            //    return res.redirect('/');
+            //}
             // 查询并返回该用户的所有文章
-            Post.getTen(user.name, page, function (err, posts, total) {
+            //Post.getTen(user.name, page, function (err, posts, total) {
+            Post.getTen(req.params.name, page, function (err, posts, total) {
                 if (err) {
                     req.flash('error', err);
                     return res.redirect('/');
                 }
                 res.render('user', {
-                    title: user.name,
+                    //title: user.name,
+                    title: req.params.name,
                     posts: posts,
                     page: page,
                     isFirstPage: (page - 1) == 0,
@@ -282,7 +298,7 @@ module.exports = function (app) {
                     error: req.flash('error').toString()
                 });
             });
-        });
+        //});
     });
 
     // 不能为'/u/:_id',避免与'/u/:name'的冲突

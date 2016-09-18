@@ -10,6 +10,6 @@
 }
 { 
     "_id" : "fEeL2pYtomzhwANCzPoYqtQPzZy8wr6E", 
-    "session" : "{\"cookie\":{\"originalMaxAge\":2591999992,\"expires\":\"2016-10-14T09:13:37.213Z\",\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"user\":null}", 
-    "expires" : ISODate("2016-10-14T09:13:37.213+0000")
+    "session" : "{\"cookie\":{\"originalMaxAge\":2591999981,\"expires\":\"2016-10-18T02:56:48.427Z\",\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"user\":{\"name\":\"puregardenia\",\"head\":\"https://avatars.githubusercontent.com/u/14371054?v=3\"}}", 
+    "expires" : ISODate("2016-10-18T02:56:48.427+0000")
 }

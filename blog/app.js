@@ -21,6 +21,11 @@ var errorLog = fs.createWriteStream('error.log', {flags: 'a'});
 
 var app = express();
 
+
+var passport = require('passport')
+    , GithubStrategy = require('passport-github').Strategy;
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -57,6 +62,8 @@ app.use(function (err, req, res, next) {
 });
 
 
+app.use(passport.initialize());//初始化 Passport
+
 // app.use('/', routes);
 // app.use('/users', users);
 routes(app);
@@ -69,6 +76,15 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+
+
+passport.use(new GithubStrategy({
+  clientID: "af7d05c70fced9dac6f8",
+  clientSecret: "65cf48783cbf0a6f92d9651740388a656aac7824",
+  callbackURL: "http://localhost:3000/login/github/callback"
+}, function(accessToken, refreshToken, profile, done) {
+  done(null, profile);
+}));
 // error handlers
 
 // development error handler

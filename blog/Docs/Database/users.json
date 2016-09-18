@@ -26,3 +26,10 @@
     "email" : "2@qq.com", 
     "head" : "http://www.gravatar.com/avatar/4f987513d1e66d3d02d60b7d82667000?s=48"
 }
+{ 
+    "_id" : ObjectId("57dde866cbeaf6841155b0a8"), 
+    "name" : "3", 
+    "password" : "c4ca4238a0b923820dcc509a6f75849b", 
+    "email" : "3@qq.com", 
+    "head" : "http://www.gravatar.com/avatar/69938a60b5519a50e76d597f4386f0c9?s=48"
+}

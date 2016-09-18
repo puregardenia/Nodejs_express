@@ -5,7 +5,7 @@
 <% if (post.comments) {%>
 <% post.comments.forEach(function (comment, index) { %>
 <p>
-    <img src="<%= comment.head %>" class="l_head" />
+    <img src="<%= comment.head %>" class="l_head" width="50" heigh="50"/>
     <a href="<%= comment.website %>">
         <%= comment.name %>
     </a>

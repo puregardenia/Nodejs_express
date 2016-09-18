@@ -181,7 +181,7 @@
             "_id" : "57da2e122a60c37085c8da24"
         }
     }, 
-    "pv" : NumberInt(8)
+    "pv" : NumberInt(9)
 }
 { 
     "_id" : ObjectId("57da30663fece7b43f1e59a3"), 
@@ -236,5 +236,57 @@
     "reprint_info" : {
 
     }, 
-    "pv" : NumberInt(6)
+    "pv" : NumberInt(10)
+}
+{ 
+    "_id" : ObjectId("57ddfba97a1df2cc2923e377"), 
+    "name" : "puregardenia", 
+    "head" : "https://avatars.githubusercontent.com/u/14371054?v=3", 
+    "time" : {
+        "date" : ISODate("2016-09-18T02:27:53.829+0000"), 
+        "year" : NumberInt(2016), 
+        "month" : "2016-9", 
+        "day" : "2016-9-18", 
+        "minute" : "2016-9-18 10:27"
+    }, 
+    "title" : "Github Auth Test", 
+    "tags" : [
+        "Github", 
+        "Auth", 
+        "Test"
+    ], 
+    "post" : "Github 账户登录认证测试！", 
+    "comments" : [
+
+    ], 
+    "reprint_info" : {
+
+    }, 
+    "pv" : NumberInt(5)
+}
+{ 
+    "_id" : ObjectId("57de025aec6a41682828e12d"), 
+    "name" : "puregardenia", 
+    "head" : "https://avatars.githubusercontent.com/u/14371054?v=3", 
+    "time" : {
+        "date" : ISODate("2016-09-18T02:56:26.618+0000"), 
+        "year" : NumberInt(2016), 
+        "month" : "2016-9", 
+        "day" : "2016-9-18", 
+        "minute" : "2016-9-18 10:56"
+    }, 
+    "title" : "Github Auth Post", 
+    "tags" : [
+        "Github", 
+        "Post", 
+        "Final"
+    ], 
+    "post" : "使用Github认证账号登录 发的文章", 
+    "comments" : [
+
+    ], 
+    "reprint_info" : {
+
+    }, 
+    "pv" : NumberInt(0)
 }
