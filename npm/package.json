@@ -1,0 +1,16 @@
+{
+  "name": "libuv_thread",
+  "version": "0.0.0",
+  "description": "A Node.js multi-thread package,using libuv lib",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./test/test.js"
+  },
+  "keywords": [
+    "node",
+    "libuv",
+    "thread"
+  ],
+  "author": "puregardenia",
+  "license": "BSD-2-Clause"
+}
