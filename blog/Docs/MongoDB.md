@@ -1,14 +1,14 @@
 ## 安装
 
 为了从命令提示符下运行MongoDB服务器，你必须从MongoDB目录的bin目录中执行mongod.exe文件。
-```
-  mongod.exe --dbpath D:\Data\db
-```
+
+    mongod.exe --dbpath D:\Data\db
+
 将MongoDB服务器作为Windows服务运行(管理员权限)
-```
-  mongod.exe --bind_ip 127.0.0.1 --logpath "D:\Data\dbConf\mongodb.log" --logappend --dbpath "D:\Data\db" --port 27017 --serviceName "MongoDB" --serviceDisplayName "MyMongodb" --install
-  mongod.exe --storageEngine "mmapv1" --logpath "D:\Data\dbConf\mongodb.log" --logappend --dbpath "D:\Data\db" --install --serviceName "MongoDB" --serviceDisplayName "mongodb" --journal
-```
+
+    mongod.exe --bind_ip 127.0.0.1 --logpath "D:\Data\dbConf\mongodb.log" --logappend --dbpath "D:\Data\db" --port 27017 --serviceName "MongoDB" --serviceDisplayName "MyMongodb" --install
+    mongod.exe --storageEngine "mmapv1" --logpath "D:\Data\dbConf\mongodb.log" --logappend --dbpath "D:\Data\db" --install --serviceName "MongoDB" --serviceDisplayName "mongodb" --journal
+
 删除MongoDB Service
 ```
   mongod -dbpath "D:\data\db" -logpath "D:\data\dbConf\mongodb.log" -remove -serviceName "mongodb"
