@@ -1,0 +1,27 @@
+{
+  "name": "SocketIO",
+  "description": "This is a Angular + SocketIO chat program",
+  "main": "app.js",
+  "authors": [
+    "puregardenia@qq.com <puregardenia@qq.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Angular",
+    "SocketIO",
+    "Socket.io",
+    "Chat"
+  ],
+  "homepage": "https://github.com/puregardenia/Nodejs_express",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "angular": "^1.5.8"
+  }
+}
